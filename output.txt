@@ -1,0 +1,2 @@
+ember 0.1 - 4096 bytes of memory you can see. Type `help`.
+ember> 
