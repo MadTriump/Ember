@@ -37,6 +37,10 @@ static void print_help() {
 
 int main() {
     Memory mem;  // 4096 bytes, on the stack, zeroed by the {} in memory.hpp
+    
+    // ДАНО. Одразу після `Memory mem;`:
+    CPU cpu;
+    cpu.mem = &mem;   // «ось твоя пам'ять» — `&` теж розбирає Lab 3
 
     std::cout << "ember 0.1 - 4096 bytes of memory you can see. Type `help`.\n";
 
@@ -89,8 +93,19 @@ int main() {
                                 static_cast<Byte>(value))) {
                 std::cout << "address " << addr << " is outside 0.." << MEM_SIZE - 1
                           << '\n';
-            }
-        } else if (cmd == "inc") {
+            } else if (cmd == "reg") {
+                std::string r, v;
+                long value = 0;
+                if (!(words >> r) || !(words >> v) || !parse_number(v, value) || value < 0 ||
+                   value > 255) {
+                   std::cout << "usage: reg <a|b> <0..255>\n";
+                } else if (r == "a") {
+                     cpu.a = (Byte)value;
+                } else if (r == "b") {
+                     cpu.b = (Byte)value;
+                } else {
+                 std::cout << "unknown register: " << r << '\n';
+                } else if (cmd == "inc") {
             std::string a;
             long addr = 0;
             if (!(words >> a) || !parse_number(a, addr)) {
