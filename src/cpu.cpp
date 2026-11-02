@@ -22,11 +22,9 @@ void step(CPU& cpu) {
 
     Byte op = mem_get(*cpu.mem, cpu.pc);
 
-    // Розбір опкода на групу та індекс (старший і молодший півбайти)
     Byte group = (op >> 4) & 0x0F;
 
 
-    // Спочатку перевіримо спеціальні поодинокі інструкції (група 0x0_)
     if (group == 0x00) {
         switch (op) {
         case OP_HALT:
@@ -37,13 +35,12 @@ void step(CPU& cpu) {
             cpu.pc += 1;
             break;
         default:
-            cpu.pc += 1; // невідома інструкція в групі 0
+            cpu.pc += 1; 
             break;
         }
         return;
     }
 
-    // Група 0x1_ — це всі ALU операції (результат пишеться в регістр A)
     if (group == 0x01) {
         ALUResult res = {0, cpu.f};
         bool executed = true;
@@ -67,11 +64,11 @@ void step(CPU& cpu) {
         if (executed) {
             cpu.a = res.value;
             cpu.f = res.flags;
-            cpu.pc += 1; // Розмір ALU інструкцій у цій лабі — 1 байт
+            cpu.pc += 1;
             return;
         }
     }
 
-    // Якщо інструкція не розпізнана
+
     cpu.pc += 1;
 }

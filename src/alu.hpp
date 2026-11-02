@@ -1,15 +1,13 @@
 // alu.hpp
 #pragma once
 #include <cstdint>
-#include "cpu.hpp" // містить структуру Flags
+#include "cpu.hpp"
 
-// Структура для результату ALU (значення + прапорці)
 struct ALUResult {
     std::uint8_t value;
     Flags flags;
 };
 
-// Оголошення функцій ALU
 ALUResult alu_add(std::uint8_t a, std::uint8_t b);
 ALUResult alu_sub(std::uint8_t a, std::uint8_t b);
 ALUResult alu_and(std::uint8_t a, std::uint8_t b);

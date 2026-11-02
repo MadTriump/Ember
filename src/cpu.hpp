@@ -1,10 +1,7 @@
-// cpu.hpp — ДАНО. Прочитайте кожен рядок, як memory.hpp у першій лабі.
 #pragma once
 #include <cstdint>
 #include "memory.hpp"
 
-// Коди операцій — саме з ISA.uk.md, свого не вигадуйте.
-// Поки це звичайні константи (Lab 1, `const`). У Lab 6 вони стануть `enum class Op`.
 const Byte OP_HALT = 0x00;
 const Byte OP_NOP  = 0x01;
 const Byte OP_ADD  = 0x10;
@@ -25,9 +22,9 @@ struct Flags {
 };
 
 struct CPU {
-    Memory* mem = nullptr;   // де лежить коробка. Що таке `*`, пояснює Lab 3;
-                             // поки читайте як «процесор знає, де його пам'ять»
-    std::uint16_t pc = 0;    // адреса НАСТУПНОЇ інструкції
+    Memory* mem = nullptr;   
+                        
+    std::uint16_t pc = 0;    
     Byte a = 0;
     Byte b = 0;
     Flags f;
